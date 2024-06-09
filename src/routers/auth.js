@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const User = require('../models/User');
-const {
+const { 
     generateAccessToken,
     generateRefreshToken,
     verifyRefreshToken,
@@ -11,13 +11,11 @@ const {
 
 const router = express.Router();
 
-const redirectURI = process.env.NODE_ENV === 'production' ? process.env.GOOGLE_REDIRECT_URI_PROD : process.env.GOOGLE_REDIRECT_URI;
-
 router.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-router.get(redirectURI.replace('/callback', ''), // 동적으로 콜백 경로 설정
+router.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     async (req, res) => {
         let user = req.user;
@@ -149,12 +147,12 @@ router.post('/register', async (req, res) => {
             sameSite: 'strict'
         });
 
-        res.json({
-            message: '회원가입이 성공적으로 완료되었습니다.',
-            nickname: user.nickname,
+        res.json({ 
+            message: '회원가입이 성공적으로 완료되었습니다.', 
+            nickname: user.nickname, 
             avatarUrl: user.avatarUrl || '/uploads/default-avatar.png',
-            accessToken,
-            refreshToken
+            accessToken, 
+            refreshToken 
         });
     } catch (error) {
         res.status(500).json({ message: '사용자 등록 중 오류가 발생했습니다: ' + error.message });
