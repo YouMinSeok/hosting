@@ -1,0 +1,58 @@
+<div class="navbar">
+    <div class="logo">
+        <h1>SafeWebGuard</h1>
+    </div>
+    <ul class="nav-links">
+        <li class="dropdown">
+            <a href="/" class="dropbtn">홈</a>
+            <div class="dropdown-content">
+                <a href="/latest-news">최신 뉴스</a>
+                <a href="/announcements">공지사항</a>
+                <a href="/events">이벤트</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="/about" class="dropbtn">소개</a>
+            <div class="dropdown-content">
+                <a href="/our-mission">우리의 미션</a>
+                <a href="/team">팀</a>
+                <a href="/history">역사</a>
+                <a href="/research-areas">연구 분야</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="/services" class="dropbtn">서비스</a>
+            <div class="dropdown-content">
+                <a href="/consulting">컨설팅</a>
+                <a href="/development">개발</a>
+                <a href="/design">디자인</a>
+                <a href="/support">지원</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="/contact" class="dropbtn">연락처</a>
+            <div class="dropdown-content">
+                <a href="/contact-form">문의 양식</a>
+                <a href="/locations">위치</a>
+                <a href="/support">지원</a>
+                <a href="/faqs">자주 묻는 질문</a>
+            </div>
+        </li>
+        <% if (user) { %>
+            <li class="profile-info dropdown">
+                <a href="#" class="dropbtn">
+                    <img src="<%= user.avatarUrl || '/uploads/default-avatar.png' %>" alt="Avatar" class="navbar-avatar" id="navbarAvatar">
+                    <span id="navbarNickname"><%= user.nickname %></span>님 환영합니다!
+                </a>
+                <div class="dropdown-content">
+                    <a href="/profile">내 프로필</a>
+                    <a href="/friends">친구</a>
+                </div>
+            </li>
+            <li><a href="/logout">로그아웃</a></li>
+        <% } else { %>
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
+        <% } %>
+    </ul>
+</div>

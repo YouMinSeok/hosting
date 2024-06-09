@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/profile-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="profile-page <%= user.selectedTheme %>">
+    <header class="header-hero-container">
+        <%- include('partials/navbar', { user: user }) %>
+    </header>
+    <div class="profile-page-container <%= user.selectedTheme %>">
+        <div class="profile-page-card">
+            <div class="profile-header">
+                <h2 id="welcomeMessage"><%= user.nickname %>님, 환영합니다!</h2>
+                <div class="profile-avatar">
+                    <img src="<%= user.avatarUrl %>" alt="User Avatar" id="avatarImage">
+                    <input type="file" id="avatarInput" style="display: none;">
+                    <button class="btn change-avatar-btn" onclick="document.getElementById('avatarInput').click()">Change Avatar</button>
+                </div>
+            </div>
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="openTab(event, 'basic-info')">기본 정보</button>
+                <button class="tab-btn" onclick="openTab(event, 'activity')">활동 내역</button>
+                <button class="tab-btn" onclick="openTab(event, 'settings')">설정</button>
+                <button class="tab-btn" onclick="openTab(event, 'updates')">업데이트 내역</button>
+            </div>
+            <div id="basic-info" class="tab-content active">
+                <div class="profile-page-info">
+                    <input type="hidden" id="userId" value="<%= user._id %>">
+                    <div class="profile-info-item">
+                        <strong class="info-label">Username:</strong>
+                        <span class="info-value"><%= user.username %></span>
+                    </div>
+                    <div class="profile-info-item">
+                        <strong class="info-label">Nickname:</strong>
+                        <span class="info-value" id="nicknameDisplay"><%= user.nickname %></span>
+                    </div>
+                    <div class="profile-info-item">
+                        <strong class="info-label">Email:</strong>
+                        <span class="info-value"><%= user.email %></span>
+                    </div>
+                    <div class="profile-info-item">
+                        <strong class="info-label">Short ID:</strong>
+                        <span class="info-value" id="shortIdValue"><%= user.shortId %></span>
+                        <button class="btn copy-btn" onclick="copyToClipboard('<%= user.shortId %>', this)">복사하기</button>
+                    </div>
+                    <div class="profile-info-item">
+                        <strong class="info-label">Password:</strong>
+                        <span class="info-value">********</span>
+                    </div>
+                    <div class="profile-info-item">
+                        <strong class="info-label">연동된 계정:</strong>
+                        <span class="info-value">
+                            <% if (user.googleId) { %>
+                                <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Icon" style="width: 92px; vertical-align: middle; margin-right: 5px;"> 계정으로 로그인 중
+                            <% } %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="activity" class="tab-content">
+                <div class="activity-content">
+                    <h3>활동 내역</h3>
+                    <div class="activity-log">
+                        <% user.loginRecords.forEach(record => { %>
+                            <div class="message">
+                                <div class="message-content">
+                                    <span class="message-time"><%= new Date(record).toLocaleString() %></span>
+                                    <span class="message-text">로그인했습니다.</span>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                    <div class="console-input">
+                        <input type="text" id="consoleInput" placeholder="명령어를 입력하세요 (예: /clear all)">
+                    </div>
+                </div>
+            </div>
+            <div id="settings" class="tab-content">
+                <div class="settings-category">
+                    <h3>개인정보</h3>
+                    <div class="profile-page-info">
+                        <div class="profile-info-item">
+                            <strong class="info-label">닉네임 변경:</strong>
+                            <span class="info-value" id="nicknameDisplayText"><%= user.nickname %></span>
+                            <button class="btn change-nickname-btn" onclick="showNicknameInput()">닉네임 변경</button>
+                            <div class="input-group" id="nicknameInputGroup" style="display: none;">
+                                <input type="text" id="nicknameInput" value="">
+                                <button class="btn check-nickname-btn" onclick="checkNickname()">중복 확인</button>
+                            </div>
+                            <span id="nicknameMessage" style="display: none;"></span>
+                        </div>
+                    </div>
+                    <h3>테마 설정</h3>
+                    <div class="profile-page-info">
+                        <div class="profile-info-item">
+                            <strong class="info-label">테마 선택:</strong>
+                            <div class="theme-selector">
+                                <button class="theme-btn" onclick="setTheme('light-theme')">밝은 테마</button>
+                                <button class="theme-btn" onclick="setTheme('dark-theme')">어두운 테마</button>
+                                <button class="theme-btn" onclick="setTheme('cute-theme')">아기자기한 테마</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="updates" class="tab-content">
+                <div class="updates-category">
+                    <h3>업데이트 내역</h3>
+                    <ul class="updates-list">
+                        <li><strong>Web 업데이트 버전:</strong> 1.0.0</li>
+                        <li><strong>Web UI 버전:</strong> 1.0</li>
+                        <li><strong>Node.js 버전:</strong> 14.17.0</li>
+                        <li><strong>웹 프레임워크 (Express) 버전:</strong> 4.17.1</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button class="btn save-btn" onclick="saveProfile()">Save Profile</button>
+            </div>
+        </div>
+    </div>
+    <script src="/scripts/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/about.css">
+</head>
+<body class="main">
+    <header class="header-hero-container">
+        <%- include('partials/navbar', { user: user }) %>
+    </header>
+    <section class="about-hero">
+        <h1>About Us</h1>
+        <p>Discover more about our mission, vision, and the team behind our project.</p>
+    </section>
+    <section class="about-content">
+        <div class="about-section">
+            <h2>Our Mission</h2>
+            <p>Our mission is to develop cutting-edge web applications that prioritize security and user experience.</p>
+        </div>
+        <div class="about-section">
+            <h2>Our Vision</h2>
+            <p>We envision a world where technology empowers users while protecting their privacy and data.</p>
+        </div>
+        <div class="about-section">
+            <h2>Our Team</h2>
+            <div class="team-member">
+                <img src="/uploads/team-member-1.jpg" alt="Team Member 1">
+                <h3>Minseok Yu</h3>
+                <p>Lead Developer</p>
+            </div>
+            <div class="team-member">
+                <img src="/uploads/team-member-2.jpg" alt="Team Member 2">
+                <h3>Jai Yu</h3>
+                <p>Project Manager</p>
+            </div>
+            <!-- Add more team members as needed -->
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 배재대학교 대학원. All rights reserved. Developed by Minseok Yu and Jai Yu.</p>
+    </footer>
+</body>
+</html>

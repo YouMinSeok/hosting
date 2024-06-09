@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>친구</title>
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/friend-styles.css">
+    <!-- socket.io 클라이언트 라이브러리 추가 -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket; // 전역 변수로 정의
+    </script>
+</head>
+<body class="profile-page" data-user-id="<%= user._id %>" data-user-shortid="<%= user.shortId %>" data-user-nickname="<%= user.nickname %>" data-user-avatar="<%= user.avatarUrl %>">
+    <header class="header-hero-container">
+        <%- include('partials/navbar', { user: user }) %>
+    </header>
+    <div class="messenger-container">
+        <div class="sidebar">
+            <div class="profile-header">
+                <h2>친구</h2>
+            </div>
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="openTab(event, 'friendList')">친구 목록</button>
+                <button class="tab-btn" onclick="openTab(event, 'addFriend')">친구 추가</button>
+                <button class="tab-btn" onclick="openTab(event, 'friendRequests')">친구 요청</button>
+            </div>
+            <div id="friendList" class="tab-content active">
+                <ul class="friend-list">
+                    <% friends.forEach(friend => { %>
+                        <li class="friend-item" data-short-id="<%= friend.shortId %>" onclick="showFriendDetails('<%= friend.shortId %>', '<%= friend.nickname %>', '<%= friend.email %>', '<%= friend.avatarUrl %>')">
+                            <div class="friend-status <%= friend.isOnline ? 'online' : 'offline' %>"></div>
+                            <img src="<%= friend.avatarUrl %>" alt="Avatar" class="friend-avatar">
+                            <div class="friend-info">
+                                <span class="friend-nickname" data-short-id="<%= friend.shortId %>"><%= friend.nickname %></span>
+                                <span class="friend-email"><%= friend.email %></span>
+                            </div>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div id="addFriend" class="tab-content">
+                <div class="add-friend">
+                    <h3>친구 추가</h3>
+                    <div class="add-friend-input">
+                        <input type="text" id="shortIdInput" placeholder="Short ID 입력">
+                        <button id="sendFriendRequestBtn">추가</button>
+                    </div>
+                </div>
+            </div>
+            <div id="friendRequests" class="tab-content">
+                <h3>친구 요청</h3>
+                <ul class="friend-requests">
+                    <% if (friendRequests.length === 0) { %>
+                        <li class="no-requests">새로운 친구 요청이 없습니다.</li>
+                    <% } else { %>
+                        <% friendRequests.forEach(request => { %>
+                            <li class="friend-request-item">
+                                <div class="request-info">
+                                    <img src="<%= request.requester.avatarUrl %>" alt="Avatar" class="friend-avatar">
+                                    <div>
+                                        <span class="request-nickname"><%= request.requester.nickname %></span>
+                                        <span class="request-email"><%= request.requester.email %></span>
+                                    </div>
+                                </div>
+                                <div class="friend-request-buttons">
+                                    <button class="accept-btn" data-request-id="<%= request._id %>">수락</button>
+                                    <button class="decline-btn" data-request-id="<%= request._id %>">거부</button>
+                                </div>
+                            </li>
+                        <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="profile-card" id="profileCard" style="display: none;">
+                <img src="/path/to/cover-image.jpg" alt="Cover" class="profile-cover">
+                <img src="" alt="Avatar" class="friend-profile-avatar">
+                <div class="friend-profile-info">
+                    <span class="friend-nickname"></span>
+                    <span class="friend-email"></span>
+                </div>
+                <button class="message-btn" onclick="startChat()">메시지</button>
+            </div>
+            <div class="chat-box" id="chatBox" style="display: none;">
+                <div class="chat-header">
+                    <button class="back-btn" onclick="closeChat()"><i class="arrow-left"></i></button>
+                    <span class="chat-friend-name"></span>
+                </div>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="메시지를 입력하세요">
+                    <button onclick="sendMessage()">전송</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 클라이언트 스크립트 추가 -->
+    <script src="/scripts/friend.js"></script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+body {
+    background-color: #000000; /* 전체 배경 색을 검정으로 변경 */
+    color: #ffffff; /* 텍스트 색상을 흰색으로 변경 */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* 페이지 높이 감소 */
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0a0a23;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.hero-container {
+    position: relative;
+    overflow: hidden;
+    height: 40vh; /* 슬라이드 창 높이 감소 */
+}
+
+.hero {
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.hero-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 3em 2em;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 위에서 살짝 아래로 이동 */
+    align-items: center; /* 중앙에 배치 */
+    text-align: center; /* 텍스트를 중앙 정렬 */
+    padding-top: 10vh; /* 중앙에서 약간 아래로 이동 */
+    color: #000000; /* 슬라이드 내 텍스트 색상을 검정으로 */
+}
+
+.hero-title {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.hero-subtitle {
+    font-size: 1em;
+    margin-bottom: 1em;
+    color: #666;
+}
+
+.btn {
+    background-color: #444;
+    color: #ffffff;
+    padding: 0.5em 1.5em;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+.slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}
+
+.slide-btn.left {
+    left: 10px;
+}
+
+.slide-btn.right {
+    right: 10px;
+}
+
+.content {
+    padding: 1.5em;
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+}
+
+.content h2 {
+    font-size: 1.8em; /* 폰트 크기 적절하게 조정 */
+    margin-bottom: 1em;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.feature {
+    width: 28%;
+    padding: 1em; /* 패딩 적절하게 조정 */
+    background-color: #1c1c1c;
+    border-radius: 8px;
+    margin-bottom: 1em;
+    text-align: left;
+    color: #ffffff;
+    box-sizing: border-box; /* 박스 크기 설정 */
+    height: 250px; /* 높이 고정 */
+}
+
+.feature h3 {
+    font-size: 1.5em; /* 폰트 크기 적절하게 조정 */
+    margin-bottom: 0.5em;
+}
+
+.feature p {
+    font-size: 1em; /* 폰트 크기 적절하게 조정 */
+    margin-bottom: 0.5em;
+}
+
+.feature .icon {
+    font-size: 2em; /* 아이콘 크기 적절하게 조정 */
+    margin-bottom: 0.5em;
+}
+
+.notice {
+    background-color: #1c1c1c;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+
+.notice h2 {
+    font-size: 1.8em; /* 폰트 크기 적절하게 조정 */
+    margin-bottom: 1em;
+}
+
+.notice a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    font-size: 1em; /* 폰트 크기 적절하게 조정 */
+    margin: 0.5em 0;
+}
+
+.notice a:hover {
+    text-decoration: underline;
+}
+
+.notice img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1em;
+}
+
+footer {
+    text-align: center;
+    padding: 1em 0;
+    background-color: #000000; /* 푸터 배경 색상을 검정으로 변경 */
+    border-top: 1px solid #ccc;
+    margin-top: auto; /* 푸터를 페이지 하단으로 이동 */
+}
+
+footer p {
+    margin: 0;
+    color: #ffffff; /* 푸터 텍스트 색상을 흰색으로 변경 */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar a {
+        margin: 5px 0;
+    }
+    .hero-slide {
+        padding-top: 5vh; /* 작은 화면에서 슬라이드 내용 위로 이동 */
+    }
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+    .feature {
+        width: 80%;
+    }
+    .notice img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.5em;
+    }
+    .hero-subtitle {
+        font-size: 0.8em;
+    }
+    .btn {
+        padding: 0.5em 1em;
+    }
+    .slide-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1em;
+    }
+    .content h2 {
+        font-size: 1.5em;
+    }
+    .feature h3 {
+        font-size: 1.2em;
+    }
+    .feature p {
+        font-size: 0.9em;
+    }
+    .feature .icon {
+        font-size: 1.5em;
+    }
+    .notice h2 {
+        font-size: 1.2em;
+    }
+    .notice a {
+        font-size: 0.9em;
+    }
+}

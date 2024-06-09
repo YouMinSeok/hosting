@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/register.css">
+</head>
+<body class="register-page">
+    <header class="header-hero-container">
+        <%- include('partials/navbar', { user: user }) %>
+    </header>
+
+    <section class="register-section">
+        <div class="register-form-container">
+            <div class="register-form">
+                <h2>회원가입</h2>
+                <form id="registerForm">
+                    <div class="input-group">
+                        <input type="text" name="username" id="username" placeholder="사용자 이름" required>
+                        <span id="usernameError" class="error"></span>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" name="email" id="email" placeholder="이메일" required>
+                        <span id="emailError" class="error"></span>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" placeholder="비밀번호" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="confirmPassword" placeholder="비밀번호 확인" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="nickname" id="nickname" placeholder="닉네임" required>
+                        <span id="nicknameError" class="error"></span>
+                    </div>
+                    <button type="submit" class="btn">회원가입</button>
+                </form>
+                <p>계정이 있으신가요? <a href="/login">여기서 로그인하세요</a></p>
+                <p id="registrationMessage"></p>
+            </div>
+        </div>
+    </section>
+
+    <div id="loadingScreen" class="loading-screen">
+        <div class="spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <p class="loading-text">회원가입 처리 중입니다...</p>
+    </div>
+
+    <footer>
+        <p>&copy; 배재대학교 대학원 . All rights reserved. Developed by Minseok Yu and Jai Yu.</p>
+    </footer>
+
+    <script src="/scripts/register.js"></script>
+</body>
+</html>

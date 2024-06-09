@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/login.css">
+</head>
+<body class="login-page">
+    <header class="header-hero-container">
+        <%- include('partials/navbar', { user: user }) %>
+    </header>
+
+    <section class="login-section">
+        <div class="login-form-container">
+            <div class="login-form">
+                <h2>로그인</h2>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <input type="text" name="username" id="username" placeholder="사용자 이름" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" id="password" placeholder="비밀번호" required>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="rememberMe" id="rememberMe">
+                        <label for="rememberMe">아이디 기억하기</label>
+                    </div>
+                    <button type="submit" class="btn">로그인</button>
+                </form>
+                <div class="easy-login">
+                    <hr>
+                    <p>간편 로그인</p>
+                    <a href="/auth/google" id="googleLoginButton" class="btn btn-google">
+                        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo">
+                        <span>Login with Google</span>
+                    </a>
+                </div>
+                <p>계정이 없으신가요? <a href="/register">회원가입</a></p>
+            </div>
+        </div>
+    </section>
+
+    <div id="loadingScreen" class="loading-screen">
+        <div class="spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <p class="loading-text">로그인 처리 중입니다...</p>
+    </div>
+
+    <footer>
+        <p>&copy; 배재대학교 대학원. All rights reserved. Developed by Minseok Yu and Jai Yu.</p>
+    </footer>
+
+    <script src="/scripts/login.js"></script>
+</body>
+</html>
